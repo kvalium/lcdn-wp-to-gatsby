@@ -116,11 +116,20 @@ module.exports = {
         // This option is particularly useful in case you need access to
         // URLs for thumbnails, or any other media detail.
         // Defaults to false
-        keepMediaSizes: false,
+        keepMediaSizes: true,
         // use a custom normalizer which is applied after the built-in ones.
-        normalizer: function({ entities }) {
-          return entities
-        },
+        // normalizer: function({ entities }) {
+        //   return entities
+        // },
+        plugins: [
+          {
+            resolve: `gatsby-wordpress-inline-images`,
+            options: {
+              baseUrl: process.env.WP_BASEURL,
+              protocol: `http`
+            }
+          }
+        ]
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
