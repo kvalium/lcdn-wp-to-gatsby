@@ -27,7 +27,7 @@ class Home extends Component {
             <div key={node.slug}>
               <Link to={node.slug}>
                 <h3>{node.title}</h3>
-                <img src={node.featured_img} alt={node.title} />
+                {/* <img src={node.featured_img} alt={node.title} /> */}
               </Link>
               <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
             </div>
@@ -60,7 +60,6 @@ export const pageQuery = graphql`
           id
           slug
           title
-          featured_img
           date
           excerpt
         }
