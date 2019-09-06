@@ -31,23 +31,3 @@
 .youtube-player {
   height: 100%;
 }
-
-.image-gallery {
-  width: 100%;
-  height: auto;
-  text-align: center;
-}
-
-.image-gallery-slide img {
-  width:auto;
-  height: auto;
-  max-height: 80vh;
-  object-fit: fit;
-  overflow: hidden;
-  object-position: center center;
-}
-
-.fullscreen .image-gallery-slide img {
-  height: 100vh;
-  max-height: 100vh;
-}

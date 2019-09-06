@@ -10,7 +10,6 @@ import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
 
 import "bulma/css/bulma.min.css"
-import "react-image-gallery/styles/css/image-gallery.css"
 import "./layout.css"
 
 import Header from "./header"
