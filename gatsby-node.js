@@ -48,7 +48,7 @@ exports.createPages = async ({ graphql, actions }) => {
   // Access query results via object destructuring
   const { allWordpressPage, allWordpressPost } = result.data
 
-  const pageTemplate = path.resolve(`./src/templates/page.js`)
+  const pageTemplate = path.resolve(`./src/wp-templates/page.js`)
   // We want to create a detailed page for each
   // page node. We'll just use the WordPress Slug for the slug.
   // The Page ID is prefixed with 'PAGE_'
@@ -69,7 +69,7 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
-  const postTemplate = path.resolve(`./src/templates/post.js`)
+  const postTemplate = path.resolve(`./src/wp-templates/post.js`)
   // We want to create a detailed page for each
   // post node. We'll just use the WordPress Slug for the slug.
   // The Post ID is prefixed with 'POST_'

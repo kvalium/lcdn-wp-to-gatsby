@@ -86,10 +86,10 @@ module.exports = {
         // Set how many pages are retrieved per API request.
         perPage: 20,
         // Search and Replace Urls across WordPress content.
-        // searchAndReplaceContentUrls: {
-        //   sourceUrl: process.env.WP_REPLACESRC,
-        //   replacementUrl: process.env.WP_REPLACEBY,
-        // },
+        searchAndReplaceContentUrls: {
+          sourceUrl: process.env.WP_REPLACESRC,
+          replacementUrl: process.env.WP_REPLACEBY,
+        },
         // Set how many simultaneous requests are sent at once.
         concurrentRequests: 20,
         // Set WP REST API routes whitelists
@@ -105,7 +105,7 @@ module.exports = {
           "**/categories",
           "**/posts",
           "**/pages",
-          "**/media",
+          // "**/media",
           // "**/tags",
           // "**/taxonomies",
           "**/users",
@@ -116,24 +116,15 @@ module.exports = {
         // This option is particularly useful in case you need access to
         // URLs for thumbnails, or any other media detail.
         // Defaults to false
-        keepMediaSizes: true,
+        keepMediaSizes: false,
         // use a custom normalizer which is applied after the built-in ones.
-        // normalizer: function({ entities }) {
-        //   return entities
-        // },
-        plugins: [
-          {
-            resolve: `gatsby-wordpress-inline-images`,
-            options: {
-              baseUrl: process.env.WP_BASEURL,
-              protocol: `http`
-            }
-          }
-        ]
+        normalizer: function({ entities }) {
+          return entities
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
+    // `gatsby-plugin-offline`,
   ],
 }
