@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import React from "react"
 
 const Header = ({ siteTitle }) => (
-  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
+  <nav className="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div className="navbar-brand">
       <Link to="/">{siteTitle}</Link>
     </div>
   </nav>

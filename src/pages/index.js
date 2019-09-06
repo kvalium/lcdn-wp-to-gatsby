@@ -26,14 +26,14 @@ export default function Index({ data }) {
             <div className="column is-one-third" key={node.slug}>
               <Link to={node.slug}>
                 <div className="card">
-                  <div class="card-image">
-                    <figure class="image is-4by3">
+                  <div className="card-image">
+                    <figure className="image is-4by3">
                       <img src={node.featured_img} alt={node.title} />
                     </figure>
                   </div>
-                  <div class="card-content">
+                  <div className="card-content">
                     <h3 className="title is-4">{decode(node.title)}</h3>
-                    <div class="content">
+                    <div className="content">
                       <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
                     </div>
                   </div>
