@@ -1,16 +1,16 @@
-import React, { Component } from "react"
+import React from "react"
 import { Link, graphql } from "gatsby"
+import { decode } from "he"
 
-class Home extends Component {
-  render() {
-    const data = this.props.data
+import Layout from "../components/layout"
 
-    return (
-      <>
-        <div>
-          <h1>Pages</h1>
+export default function Index({ data }) {
+  return (
+    <Layout>
+      {/* <div>
+          <h2 className="subtitle">Pages</h2>
           {data.allWordpressPage.edges.map(({ node }) => (
-            <div key={node.slug}>
+            <div className="box" key={node.slug}>
               <Link to={node.slug}>
                 <h3>{node.title}</h3>
               </Link>
@@ -18,27 +18,34 @@ class Home extends Component {
               <span>{node.date}</span>
             </div>
           ))}
-        </div>
-        <hr />
-        <h1>Posts</h1>
+        </div> */}
+      <h2 className="subtitle">Articles</h2>
+      <div className="columns is-multiline">
         {data.allWordpressPost.edges.map(({ node }) => {
-          console.log(node)
           return (
-            <div key={node.slug}>
+            <div className="column is-one-third" key={node.slug}>
               <Link to={node.slug}>
-                <h3>{node.title}</h3>
-                {/* <img src={node.featured_img} alt={node.title} /> */}
+                <div className="card">
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src={node.featured_img} alt={node.title} />
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <h3 className="title is-4">{decode(node.title)}</h3>
+                    <div class="content">
+                      <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+                    </div>
+                  </div>
+                </div>
               </Link>
-              <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
             </div>
           )
         })}
-      </>
-    )
-  }
+      </div>
+    </Layout>
+  )
 }
-
-export default Home
 
 // Set here the ID of the home page.
 export const pageQuery = graphql`
@@ -54,14 +61,21 @@ export const pageQuery = graphql`
         }
       }
     }
-    allWordpressPost(limit: 10) {
+    allWordpressPost(limit: 9) {
       edges {
         node {
           id
           slug
           title
-          date
+          date(formatString: "DD MMMM YYYY", locale: "FR")
+          featured_img
           excerpt
+          author {
+            name
+          }
+          categories {
+            name
+          }
         }
       }
     }

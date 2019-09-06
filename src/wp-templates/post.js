@@ -2,14 +2,19 @@ import React, { Component } from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
 
+import Layout from "../components/layout"
+
 class PostTemplate extends Component {
   render() {
     const post = this.props.data.wordpressPost
     return (
-      <>
-        <h1 dangerouslySetInnerHTML={{ __html: post.title }} />
+      <Layout>
+        <h1
+          className="title"
+          dangerouslySetInnerHTML={{ __html: post.title }}
+        />
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
-      </>
+      </Layout>
     )
   }
 }
