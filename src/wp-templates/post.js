@@ -1,57 +1,53 @@
 import React, { useState, useCallback } from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
-import Gallery from "react-photo-gallery";
-import Carousel, { Modal, ModalGateway } from "react-images";
+import Gallery from "react-photo-gallery"
+import Carousel, { Modal, ModalGateway } from "react-images"
 
 import Layout from "../components/layout"
 
-import { wpToGatsbyCarousel } from "../services/imagesServices";
+import { wpToGatsbyCarousel } from "../services/imagesServices"
 
-function PostTemplate({data}) {
-  const [currentImage, setCurrentImage] = useState(0);
-  const [viewerIsOpen, setViewerIsOpen] = useState(false);
+function PostTemplate({ data }) {
+  const [currentImage, setCurrentImage] = useState(0)
+  const [viewerIsOpen, setViewerIsOpen] = useState(false)
 
   const openLightbox = useCallback((event, { photo, index }) => {
-    setCurrentImage(index);
-    setViewerIsOpen(true);
-  }, []);
+    setCurrentImage(index)
+    setViewerIsOpen(true)
+  }, [])
 
   const closeLightbox = () => {
-    setCurrentImage(0);
-    setViewerIsOpen(false);
-  };
+    setCurrentImage(0)
+    setViewerIsOpen(false)
+  }
 
-    const post = data.wordpressPost
-    const gallery = wpToGatsbyCarousel(post)
-    return (
-      <Layout>
-        <h1
-          className="title"
-          dangerouslySetInnerHTML={{ __html: post.title }}
-        />
-        { gallery && (
-          <>
-            <Gallery photos={gallery} onClick={openLightbox} />
-            <ModalGateway>
-              {viewerIsOpen && (
-                <Modal onClose={closeLightbox}>
-                  <Carousel
-                    currentIndex={currentImage}
-                    views={gallery.map(x => ({
-                      ...x,
-                      srcset: x.srcSet,
-                      caption: x.title
-                    }))}
-                  />
-                </Modal>
-              )}
-            </ModalGateway>
-          </>
-        )}
-
-      </Layout>
-    )
+  const post = data.wordpressPost
+  const gallery = wpToGatsbyCarousel(post.content)
+  return (
+    <Layout>
+      <h1 className="title" dangerouslySetInnerHTML={{ __html: post.title }} />
+      {gallery && (
+        <>
+          <Gallery photos={gallery} onClick={openLightbox} />
+          <ModalGateway>
+            {viewerIsOpen && (
+              <Modal onClose={closeLightbox}>
+                <Carousel
+                  currentIndex={currentImage}
+                  views={gallery.map(x => ({
+                    ...x,
+                    srcset: x.srcSet,
+                    caption: x.title,
+                  }))}
+                />
+              </Modal>
+            )}
+          </ModalGateway>
+        </>
+      )}
+    </Layout>
+  )
 }
 
 PostTemplate.propTypes = {
