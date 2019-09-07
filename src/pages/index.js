@@ -7,24 +7,25 @@ import Layout from "../components/layout"
 export default function Index({ data }) {
   return (
     <Layout>
-      {/* <div>
-          <h2 className="subtitle">Pages</h2>
-          {data.allWordpressPage.edges.map(({ node }) => (
-            <div className="box" key={node.slug}>
-              <Link to={node.slug}>
-                <h3>{node.title}</h3>
-              </Link>
-              <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-              <span>{node.date}</span>
-            </div>
-          ))}
-        </div> */}
+      <div>
+        <h2 className="subtitle">Pages</h2>
+        {data.allWordpressPage.edges.map(({ node }) => (
+          <div className="box" key={node.slug}>
+            <Link to={node.slug}>
+              <h3>{node.title}</h3>
+            </Link>
+            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+            <span>{node.date}</span>
+          </div>
+        ))}
+      </div>
       <h2 className="subtitle">Articles</h2>
       <div className="columns is-multiline">
         {data.allWordpressPost.edges.map(({ node }) => {
+          console.log(node.slug)
           return (
             <div className="column is-one-third" key={node.slug}>
-              <Link to={node.slug}>
+              <Link to={node.slug.replace("/","")}>
                 <div className="card">
                   <div className="card-image">
                     <figure className="image is-4by3">
@@ -61,7 +62,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allWordpressPost(limit: 9) {
+    allWordpressPost {
       edges {
         node {
           id

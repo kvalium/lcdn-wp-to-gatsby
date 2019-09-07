@@ -24,30 +24,32 @@ function PostTemplate({data}) {
 
     const post = data.wordpressPost
     const gallery = wpToGatsbyCarousel(post)
-    console.log(gallery);
     return (
       <Layout>
         <h1
           className="title"
           dangerouslySetInnerHTML={{ __html: post.title }}
         />
-        {/* <div dangerouslySetInnerHTML={{ __html: post.content }} /> */}
+        { gallery && (
+          <>
+            <Gallery photos={gallery} onClick={openLightbox} />
+            <ModalGateway>
+              {viewerIsOpen && (
+                <Modal onClose={closeLightbox}>
+                  <Carousel
+                    currentIndex={currentImage}
+                    views={gallery.map(x => ({
+                      ...x,
+                      srcset: x.srcSet,
+                      caption: x.title
+                    }))}
+                  />
+                </Modal>
+              )}
+            </ModalGateway>
+          </>
+        )}
 
-        <Gallery photos={gallery} onClick={openLightbox} />
-        <ModalGateway>
-          {viewerIsOpen && (
-            <Modal onClose={closeLightbox}>
-              <Carousel
-                currentIndex={currentImage}
-                views={gallery.map(x => ({
-                  ...x,
-                  srcset: x.srcSet,
-                  caption: x.title
-                }))}
-              />
-            </Modal>
-          )}
-        </ModalGateway>
       </Layout>
     )
 }
