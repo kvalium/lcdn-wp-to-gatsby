@@ -26,36 +26,50 @@ function PostTemplate({ data }) {
   const postElements = extractWPPostContent(post.content)
   return (
     <Layout>
-      <h1 className="title" dangerouslySetInnerHTML={{ __html: post.title }} />
-      {postElements.map(el => {
-        if (el.type === "gallery") {
+      <div className="post">
+        <h1
+          className="title"
+          dangerouslySetInnerHTML={{ __html: post.title }}
+        />
+        {postElements.map(el => {
+          if (el.type === "gallery") {
+            return (
+              <div className="gallery" key={el.order}>
+                <Gallery photos={el.images} onClick={openLightbox} />
+                <ModalGateway>
+                  {viewerIsOpen && (
+                    <Modal onClose={closeLightbox}>
+                      <Carousel
+                        currentIndex={currentImage}
+                        views={el.images.map(x => ({
+                          ...x,
+                          srcset: x.srcSet,
+                          caption: x.title,
+                        }))}
+                      />
+                    </Modal>
+                  )}
+                </ModalGateway>
+              </div>
+            )
+          }
           return (
-            <div className="gallery" key={el.order}>
-              <Gallery photos={el.images} onClick={openLightbox} />
-              <ModalGateway>
-                {viewerIsOpen && (
-                  <Modal onClose={closeLightbox}>
-                    <Carousel
-                      currentIndex={currentImage}
-                      views={el.images.map(x => ({
-                        ...x,
-                        srcset: x.srcSet,
-                        caption: x.title,
-                      }))}
-                    />
-                  </Modal>
-                )}
-              </ModalGateway>
-            </div>
+            <div
+              className="raw"
+              key={el.order}
+              dangerouslySetInnerHTML={{ __html: el.content }}
+            />
           )
-        }
-        return (
-          <div
-            key={el.order}
-            dangerouslySetInnerHTML={{ __html: el.content }}
-          />
-        )
-      })}
+        })}
+        <nav className="level">
+          <div className="level-item has-text-centered">
+            <button className="button is-rounded">Button</button>
+          </div>
+          <div className="level-item has-text-centered">
+            <button className="button is-rounded">Button</button>
+          </div>
+        </nav>
+      </div>
     </Layout>
   )
 }

@@ -12,7 +12,6 @@
 
 .navbar {
   padding: 0 20px;
-  margin-bottom: 30px;
   z-index: 1;
 }
 .navbar-brand {
@@ -31,6 +30,11 @@
 
 .react-photo-gallery--gallery img {
   object-fit: cover;
+}
+
+.post .raw,
+.post .gallery {
+  margin-bottom: 20px;
 }
 
 .embed-youtube {
