@@ -25,6 +25,14 @@
   color: white;
 }
 
+.card-image img {
+  object-fit: cover;
+}
+
+.react-photo-gallery--gallery img {
+  object-fit: cover;
+}
+
 .embed-youtube {
   margin: 20px;
   height: 360px;
