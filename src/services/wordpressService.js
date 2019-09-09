@@ -13,7 +13,7 @@ export const extractWPPostContent = node => {
       .children()
       .map((i, el) => {
         // if wp gallery block
-        if (`${el.attribs.class}`.includes("wp-block-gallery")) {
+        if (`${el.attribs.class}`.includes("gallery")) {
           return {
             order: i,
             type: "gallery",
