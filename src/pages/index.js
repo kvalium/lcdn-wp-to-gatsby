@@ -22,7 +22,6 @@ export default function Index({ data }) {
       <h2 className="subtitle">Articles</h2>
       <div className="columns is-multiline">
         {data.allWordpressPost.edges.map(({ node }) => {
-          console.log(node.slug)
           return (
             <div className="column is-one-third" key={node.slug}>
               <Link to={node.slug}>
@@ -62,7 +61,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    allWordpressPost {
+    allWordpressPost(limit: 9) {
       edges {
         node {
           id

@@ -1,18 +1,18 @@
-export const wpToGatsbyCarousel = node => {
-  const postDom = new DOMParser().parseFromString(node, "text/html")
-  const wpCarouselImgs = Array.from(
-    postDom.querySelectorAll(
-      "ul.wp-block-gallery li.blocks-gallery-item > figure > img"
-    )
-  )
+import cheerio from "cheerio"
 
+export const wpToGatsbyCarousel = node => {
+  // using cheerio as DOMParser as build stage doesn't manipulate the DOM
+  const $ = cheerio.load(node)
+  const wpCarouselImgs = $(
+    "ul.wp-block-gallery li.blocks-gallery-item > figure > img"
+  )
   if (wpCarouselImgs.length === 0) return
-  const carouselImgs = wpCarouselImgs.map(({ attributes }) => {
-    return {
-      src: attributes.getNamedItem("data-large-file").value,
+
+  return Array.from(
+    wpCarouselImgs.map((i, { attribs }) => ({
+      src: attribs["data-large-file"],
       width: 1,
       height: 1,
-    }
-  })
-  return carouselImgs
+    }))
+  )
 }
