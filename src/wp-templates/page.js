@@ -1,4 +1,6 @@
 import React, { Component } from "react"
+import { Helmet } from "react-helmet"
+
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -9,6 +11,9 @@ class PageTemplate extends Component {
 
     return (
       <Layout>
+        <Helmet>
+          <title>{currentPage.title}</title>
+        </Helmet>
         <h1
           className="title"
           dangerouslySetInnerHTML={{ __html: currentPage.title }}

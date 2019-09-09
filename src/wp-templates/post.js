@@ -1,6 +1,8 @@
 import React, { useState, useCallback } from "react"
 import { graphql } from "gatsby"
 import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
+
 import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 
@@ -26,6 +28,9 @@ function PostTemplate({ data }) {
   const postElements = extractWPPostContent(post.content)
   return (
     <Layout>
+      <Helmet>
+        <title>{post.title}</title>
+      </Helmet>
       <div className="post">
         <h1
           className="title"
@@ -85,12 +90,17 @@ export const pageQuery = graphql`
   query($id: String!) {
     wordpressPost(id: { eq: $id }) {
       title
-      content
-    }
-    site {
-      siteMetadata {
-        title
+      date(formatString: "DD MMMM YYYY", locale: "FR")
+      date(formatString: "DD MMMM YYYY", locale: "FR")
+      categories {
+        name
+        slug
       }
+      author {
+        name
+        slug
+      }
+      content
     }
   }
 `

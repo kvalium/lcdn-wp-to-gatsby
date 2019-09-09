@@ -4,64 +4,81 @@ import { decode } from "he"
 
 import Layout from "../components/layout"
 
-export default function Index({ data }) {
-  return (
-    <Layout>
-      <div>
-        <h2 className="subtitle">Pages</h2>
-        {data.allWordpressPage.edges.map(({ node }) => (
-          <div className="box" key={node.slug}>
-            <Link to={node.slug}>
-              <h3>{node.title}</h3>
-            </Link>
-            <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-            <span>{node.date}</span>
-          </div>
-        ))}
-      </div>
-      <h2 className="subtitle">Articles</h2>
-      <div className="columns is-multiline">
-        {data.allWordpressPost.edges.map(({ node }) => {
-          return (
-            <div className="column is-one-third" key={node.slug}>
-              <Link to={node.slug}>
-                <div className="card">
-                  <div className="card-image">
-                    <figure className="image is-4by3">
-                      <img src={node.featured_img} alt={node.title} />
-                    </figure>
-                  </div>
-                  <div className="card-content">
-                    <h3 className="title is-4">{decode(node.title)}</h3>
-                    <div className="content">
-                      <div dangerouslySetInnerHTML={{ __html: node.excerpt }} />
+const numberOfPostsPerPage = 9
+
+export default class Index extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentIndex: 0,
+      displayedPosts: this.props.data.allWordpressPost.edges.slice(
+        0,
+        numberOfPostsPerPage
+      ),
+    }
+  }
+  loadMore = () => {
+    this.setState(currentState => {
+      const newIndex = currentState.currentIndex + numberOfPostsPerPage
+      return {
+        currentIndex: newIndex,
+        displayedPosts: [
+          ...currentState.displayedPosts,
+          ...this.props.data.allWordpressPost.edges.slice(
+            newIndex,
+            newIndex + numberOfPostsPerPage
+          ),
+        ],
+      }
+    })
+  }
+  render() {
+    const { data } = this.props
+    const { displayedPosts } = this.state
+    return (
+      <Layout>
+        <div className="columns is-multiline">
+          {displayedPosts.map(({ node }) => {
+            return (
+              <div className="column is-one-third" key={node.slug}>
+                <Link to={node.slug}>
+                  <div className="card">
+                    <div className="card-image">
+                      <figure className="image is-4by3">
+                        <img src={node.featured_img} alt={node.title} />
+                      </figure>
+                    </div>
+                    <div className="card-content">
+                      <h3 className="title is-4">{decode(node.title)}</h3>
+                      <div className="content">
+                        <div
+                          dangerouslySetInnerHTML={{ __html: node.excerpt }}
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Link>
-            </div>
-          )
-        })}
-      </div>
-    </Layout>
-  )
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+        <div className="has-text-centered">
+          <button
+            className="button is-info is-rounded is-large"
+            onClick={() => this.loadMore()}
+          >
+            Plus d'articles !
+          </button>
+        </div>
+      </Layout>
+    )
+  }
 }
 
 // Set here the ID of the home page.
 export const pageQuery = graphql`
   query {
-    allWordpressPage {
-      edges {
-        node {
-          id
-          slug
-          title
-          date
-          excerpt
-        }
-      }
-    }
-    allWordpressPost(limit: 9) {
+    allWordpressPost {
       edges {
         node {
           id

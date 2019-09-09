@@ -7,6 +7,8 @@
 
 import React from "react"
 import PropTypes from "prop-types"
+import { Helmet } from "react-helmet"
+
 import { useStaticQuery, graphql } from "gatsby"
 
 import "bulma/css/bulma.min.css"
@@ -27,6 +29,9 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <Helmet titleTemplate="Le Coin des Niaows - %s">
+        <title>Accueil</title>
+      </Helmet>
       <Header siteTitle={data.site.siteMetadata.title} />
       <div className="container is-fluid">
         <section className="section">{children}</section>
