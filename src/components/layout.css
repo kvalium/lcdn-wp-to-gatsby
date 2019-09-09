@@ -24,6 +24,9 @@
   color: white;
 }
 
+.card-content .title {
+  margin: 0;
+}
 .card-image img {
   object-fit: cover;
 }
