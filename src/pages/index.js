@@ -25,7 +25,7 @@ export default function Index({ data }) {
           console.log(node.slug)
           return (
             <div className="column is-one-third" key={node.slug}>
-              <Link to={node}>
+              <Link to={node.slug}>
                 <div className="card">
                   <div className="card-image">
                     <figure className="image is-4by3">
