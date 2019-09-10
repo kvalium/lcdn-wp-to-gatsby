@@ -20,8 +20,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Le-Coin-des-Niaows`,
-        short_name: `LCDN`,
+        name: `Coin des Niaows`,
+        short_name: `Coin des niaows`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
