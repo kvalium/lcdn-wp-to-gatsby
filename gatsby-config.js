@@ -136,6 +136,7 @@ module.exports = {
           ],
         },
       },
-    }`gatsby-plugin-netlify`, // Netlify plugin
+    },
+    `gatsby-plugin-netlify`, // Netlify plugin
   ],
 }
