@@ -33,7 +33,6 @@ export default class Index extends React.Component {
     })
   }
   render() {
-    const { data } = this.props
     const { displayedPosts } = this.state
     return (
       <Layout>
