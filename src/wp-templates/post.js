@@ -33,7 +33,7 @@ function PostTemplate({ data }) {
       </Helmet>
       <div className="post">
         <h1
-          className="title"
+          className="title is-1"
           dangerouslySetInnerHTML={{ __html: post.title }}
         />
         {postElements.map(el => {
