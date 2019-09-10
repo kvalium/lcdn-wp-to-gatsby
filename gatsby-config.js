@@ -127,8 +127,15 @@ module.exports = {
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    `gatsby-plugin-offline`,
-    // Netlify plugin
-    `gatsby-plugin-netlify`,
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        headers: {
+          "/*": [
+            `Basic-Auth: ${process.env.BASIC_AUTH_USER}:${process.env.BASIC_AUTH_PASSWORD}`,
+          ],
+        },
+      },
+    }`gatsby-plugin-netlify`, // Netlify plugin
   ],
 }
