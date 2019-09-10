@@ -33,7 +33,7 @@ const Layout = ({ children }) => {
         <title>Accueil</title>
       </Helmet>
       <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="container is-fluid">
+      <div className="container">
         <section className="section">{children}</section>
       </div>
       <footer className="footer">
