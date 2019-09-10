@@ -36,7 +36,6 @@ export default class Index extends React.Component {
     const { displayedPosts } = this.state
     return (
       <Layout>
-        <h1>Yo dawg</h1>
         <div className="columns is-multiline">
           {displayedPosts.map(({ node }) => {
             return (
