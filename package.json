@@ -28,6 +28,7 @@
     "react-photo-gallery": "^8.0.0"
   },
   "devDependencies": {
+    "netlify-lambda": "^1.6.3",
     "prettier": "^1.18.2"
   },
   "keywords": [
@@ -35,6 +36,7 @@
   ],
   "license": "MIT",
   "scripts": {
+    "lambda-build": "netlify-lambda build functions",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
