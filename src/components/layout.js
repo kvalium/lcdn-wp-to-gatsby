@@ -15,6 +15,7 @@ import "bulma/css/bulma.min.css"
 import "./layout.css"
 
 import Header from "./header"
+import Auth from "./auth"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -29,18 +30,20 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Helmet titleTemplate="Le Coin des Niaows - %s">
-        <title>Accueil</title>
-      </Helmet>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="container">
-        <section className="section">{children}</section>
-      </div>
-      <footer className="footer">
-        <div className="content has-text-centered">
-          <p>© {new Date().getFullYear()}</p>
+      <Auth>
+        <Helmet titleTemplate="Le Coin des Niaows - %s">
+          <title>Accueil</title>
+        </Helmet>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <div className="container">
+          <section className="section">{children}</section>
         </div>
-      </footer>
+        <footer className="footer">
+          <div className="content has-text-centered">
+            <p>© {new Date().getFullYear()}</p>
+          </div>
+        </footer>
+      </Auth>
     </>
   )
 }

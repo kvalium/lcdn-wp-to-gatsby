@@ -1,10 +1,22 @@
 require("dotenv").config()
+var proxy = require("http-proxy-middleware")
 
 module.exports = {
   siteMetadata: {
     title: `Le Coin des Niaows`,
     description: `Blog LCDN, Gatsby style`,
     author: `@kvalium`,
+  },
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      })
+    )
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
