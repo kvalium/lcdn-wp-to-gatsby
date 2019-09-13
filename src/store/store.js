@@ -5,7 +5,7 @@ import { getAuthFromStore } from "../services/authService"
 
 const loadState = () => {
   const authToken = getAuthFromStore()
-  if (!authToken) return
+  if (!authToken || typeof window === "undefined") return
   try {
     const serializedState = localStorage.getItem(authToken)
     if (serializedState === null) {
@@ -19,7 +19,7 @@ const loadState = () => {
 
 const saveState = state => {
   const authToken = getAuthFromStore()
-  if (!authToken) return
+  if (!authToken || typeof window === "undefined") return
   try {
     const serializedState = JSON.stringify(state)
     localStorage.setItem(authToken, serializedState)
@@ -32,8 +32,8 @@ const preloadedState = loadState()
 
 const store = createStore(
   authReducer,
-  preloadedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  preloadedState
+  //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 store.subscribe(() => {

@@ -16,12 +16,14 @@ export const handleLogin = password => {
 
 export const STORAGE_KEY = "AuthToken"
 
-export const getAuthFromStore = () => localStorage.getItem(STORAGE_KEY)
+export const getAuthFromStore = () =>
+  typeof window !== "undefined" && localStorage.getItem(STORAGE_KEY)
 
-const deleteAuthFromStore = () => localStorage.removeItem(STORAGE_KEY)
+const deleteAuthFromStore = () =>
+  typeof window !== "undefined" && localStorage.removeItem(STORAGE_KEY)
 
 const setAuthFromStore = chk => {
-  localStorage.setItem(STORAGE_KEY, chk)
+  typeof window !== "undefined" && localStorage.setItem(STORAGE_KEY, chk)
 }
 
 export const checkAuth = () => {
