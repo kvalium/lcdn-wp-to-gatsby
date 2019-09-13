@@ -18,9 +18,11 @@ export class Auth extends React.Component {
   }
 
   componentDidMount() {
-    checkAuth().then(({ isAuth }) => {
-      this.props.dispatch(updateAuthStatus(isAuth))
-    })
+    if (!this.props.isAuth) {
+      checkAuth().then(({ isAuth }) => {
+        this.props.dispatch(updateAuthStatus(isAuth))
+      })
+    }
   }
 
   handleLogin = e => {
@@ -38,8 +40,8 @@ export class Auth extends React.Component {
 
   render() {
     const { isLoading, errMsg } = this.state
-    const { isAuth } = this.props
-    if (isAuth) return this.props.children
+    const { isAuth, children } = this.props
+    if (isAuth) return children
     return (
       <div className="container">
         <section className="section">
