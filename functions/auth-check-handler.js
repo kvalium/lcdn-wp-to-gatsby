@@ -1,5 +1,5 @@
 require("dotenv").config()
-const md5 = require('md5');
+const md5 = require("md5")
 
 exports.handler = function(event, context, callback) {
   if (event.httpMethod !== "POST") {
@@ -9,19 +9,19 @@ exports.handler = function(event, context, callback) {
     )
   }
   const body = JSON.parse(event.body)
-  if (!body || !body.password) {
+  if (!body || !body.checksum) {
     return callback(
       null,
       formatReturn({ error: true, msg: "malformated data" })
     )
   }
-  const {GENERAL_PASSWORD, MD5_SALT} = process.env;
-  if (body.password === GENERAL_PASSWORD) {
-    return callback(null, formatReturn({ error: false, msg:  md5(`${GENERAL_PASSWORD}${MD5_SALT}`)}))
-  }
-  return callback(
+  const { GENERAL_PASSWORD, MD5_SALT } = process.env
+  const isAuth = body.checksum === md5(`${GENERAL_PASSWORD}${MD5_SALT}`)
+  callback(
     null,
-    formatReturn({ error: true, msg: "mauvais mot de passe" })
+    formatReturn({
+      isAuth,
+    })
   )
 }
 

@@ -1,74 +1,83 @@
-import React, { useState } from "react"
+import React from "react"
+import { connect } from "react-redux"
+
+import { handleLogin, checkAuth } from "../services/authService"
+import { updateAuthStatus } from "../store/actions"
 
 import "bulma/css/bulma.min.css"
 import "./layout.css"
 
-const Auth = ({ children }) => {
-  const [isAuth, setAuth] = useState(false)
-  const [isLoading, setLoading] = useState(false)
-  const [errMsg, setErrMsg] = useState(undefined)
-  return isAuth ? (
-    children
-  ) : (
-    <div className="container">
-      <section className="section">
-        <div className="card">
-          <div className="card-content">
-            <form
-              onSubmit={e => handleLogin(e, setAuth, setLoading, setErrMsg)}
-            >
-              <div className="field">
-                <label htmlFor="password" className="label is-large">
-                  Mot de passe
-                  <sub>(date de naissance de Félix JJMMAA)</sub>
-                </label>
+export class Auth extends React.Component {
+  constructor(props) {
+    super(props)
 
-                <p className="control">
-                  <input
-                    name="password"
-                    className="input is-large"
-                    type="password"
-                    placeholder="Password"
-                    maxLength={6}
-                    required
-                  />
-                </p>
-              </div>
-              <div className="field">
-                <p className="control">
-                  <button className="button is-success is-large">
-                    {isLoading ? "loading..." : "Connexion"}
-                  </button>
-                </p>
-              </div>
-              {errMsg && <p>{errMsg}</p>}
-            </form>
-          </div>
-        </div>
-      </section>
-    </div>
-  )
-}
+    this.state = {
+      isLoading: true,
+      errMsg: undefined,
+    }
+  }
 
-const handleLogin = (e, setAuth, setLoading, setErrMsg) => {
-  e.preventDefault()
-  setLoading(true)
-  const password = e.target.elements[0].value
-  fetch(process.env.GATSBY_AUTH_FN_URL, {
-    method: "POST",
-    body: JSON.stringify({
-      password,
-    }),
-  })
-    .then(r => r.json())
-    .then(result => {
-      setLoading(false)
-      if (!result.error) {
-        setAuth(true)
-        return
-      }
-      setErrMsg(result.msg)
+  componentDidMount() {
+    checkAuth().then(({ isAuth }) => {
+      this.props.dispatch(updateAuthStatus(isAuth))
     })
+  }
+
+  handleLogin = e => {
+    this.setState({ isLoading: true })
+    e.preventDefault()
+    const password = e.target.elements[0].value
+    handleLogin(password).then(r => {
+      this.setState({
+        errMsg: (r.error && r.msg) || undefined,
+        isLoading: false,
+      })
+      !r.error && this.props.dispatch(updateAuthStatus(true))
+    })
+  }
+
+  render() {
+    const { isLoading, errMsg } = this.state
+    const { isAuth } = this.props
+    if (isAuth) return this.props.children
+    return (
+      <div className="container">
+        <section className="section">
+          <div className="card">
+            <div className="card-content">
+              <form onSubmit={this.handleLogin}>
+                <div className="field">
+                  <label htmlFor="password" className="label is-large">
+                    Mot de passe
+                    <sub>(date de naissance de Félix JJMMAA)</sub>
+                  </label>
+
+                  <p className="control">
+                    <input
+                      name="password"
+                      className="input is-large"
+                      type="password"
+                      placeholder="Password"
+                      maxLength={6}
+                      required
+                    />
+                  </p>
+                </div>
+                <div className="field">
+                  <p className="control">
+                    <button className="button is-success is-large">
+                      {isLoading ? "loading..." : "Connexion"}
+                    </button>
+                  </p>
+                </div>
+                {errMsg && <p>{errMsg}</p>}
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    )
+  }
 }
 
-export default Auth
+export default connect(({ isAuth }) => ({ isAuth: isAuth || false }))(Auth)

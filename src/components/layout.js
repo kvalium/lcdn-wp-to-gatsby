@@ -11,6 +11,9 @@ import { Helmet } from "react-helmet"
 
 import { useStaticQuery, graphql } from "gatsby"
 
+import { Provider } from "react-redux"
+import store from "../store/store"
+
 import "bulma/css/bulma.min.css"
 import "./layout.css"
 
@@ -29,7 +32,7 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
+    <Provider store={store}>
       <Auth>
         <Helmet titleTemplate="Le Coin des Niaows - %s">
           <title>Accueil</title>
@@ -44,7 +47,7 @@ const Layout = ({ children }) => {
           </div>
         </footer>
       </Auth>
-    </>
+    </Provider>
   )
 }
 

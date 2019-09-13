@@ -33,7 +33,7 @@ export default class Index extends React.Component {
     })
   }
   render() {
-    const { displayedPosts, isLogged } = this.state
+    const { displayedPosts } = this.state
     return (
       <Layout>
         <div className="columns is-multiline">
