@@ -46,7 +46,7 @@ export class Auth extends React.Component {
     if (isAuth) return children
     return (
       <div className="login-page has-background-primary">
-        <section className="section">
+        <section className="section login">
           <div className="login-header has-text-centered">
             <h1 className="title is-h1">
               Bienvenue sur
