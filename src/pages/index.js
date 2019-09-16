@@ -18,24 +18,6 @@ export default class Index extends React.Component {
       ),
     }
   }
-  componentDidMount() {
-    //Options
-    var options = {
-      root: null, // Page as root
-      threshold: 1.0,
-    }
-    // Create an observer
-    if (
-      typeof window !== "undefined" &&
-      document.querySelector(".lazyload-articles") !== null
-    ) {
-      this.observer = new IntersectionObserver(
-        this.loadMore.bind(this),
-        options
-      )
-      this.observer.observe(this.loadingRef)
-    }
-  }
   loadMore = () => {
     this.setState(currentState => {
       const newIndex = currentState.currentIndex + numberOfPostsPerPage
@@ -84,10 +66,6 @@ export default class Index extends React.Component {
             })}
           </div>
           <div className="has-text-centered">
-            <div
-              className="lazyload-articles"
-              ref={loadingRef => (this.loadingRef = loadingRef)}
-            />
             <button
               className="button is-info is-rounded is-large"
               onClick={() => this.loadMore()}
