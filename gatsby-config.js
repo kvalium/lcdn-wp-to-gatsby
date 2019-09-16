@@ -35,8 +35,8 @@ module.exports = {
         name: `Coin des Niaows`,
         short_name: `Coin des niaows`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#00d1b2`,
+        theme_color: `#00d1b2`,
         // display: `minimal-ui`,
         display: "standalone",
         icon: `src/images/lcdn-icon.png`, // This path is relative to the root of the site.

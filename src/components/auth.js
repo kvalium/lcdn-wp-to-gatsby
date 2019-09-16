@@ -7,12 +7,14 @@ import { updateAuthStatus } from "../store/actions"
 import "bulma/css/bulma.min.css"
 import "./layout.css"
 
+// import lcdnLogo from "../images/lcdn-icon.png"
+
 export class Auth extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      isLoading: true,
+      isLoading: false,
       errMsg: undefined,
     }
   }
@@ -43,37 +45,56 @@ export class Auth extends React.Component {
     const { isAuth, children } = this.props
     if (isAuth) return children
     return (
-      <div className="container">
+      <div className="login-page has-background-primary">
         <section className="section">
-          <div className="card">
-            <div className="card-content">
-              <form onSubmit={this.handleLogin}>
-                <div className="field">
-                  <label htmlFor="password" className="label is-large">
-                    Mot de passe
-                    <sub>(date de naissance de Félix JJMMAA)</sub>
-                  </label>
-
-                  <p className="control">
-                    <input
-                      name="password"
-                      className="input is-large"
-                      type="password"
-                      placeholder="Password"
-                      maxLength={6}
-                      required
-                    />
-                  </p>
+          <div className="login-header has-text-centered">
+            <h1 className="title is-h1">
+              Bienvenue sur
+              <br />
+              <span class="site-name">le Coin des Niaows !</span>
+            </h1>
+          </div>
+          <div className="columns is-centered">
+            <div className="column is-half">
+              <div className="card">
+                <div className="card-content">
+                  <form onSubmit={this.handleLogin}>
+                    <div className="field">
+                      <label htmlFor="password" className="label">
+                        <h2 className="title is-h2">Mot de passe</h2>
+                      </label>
+                      <div
+                        className={`control is-large${
+                          isLoading ? " is-loading" : ""
+                        }`}
+                      >
+                        <input
+                          name="password"
+                          className={`input is-large${
+                            errMsg ? " is-danger" : ""
+                          }`}
+                          type="password"
+                          placeholder="mot de passe"
+                          maxLength={6}
+                          size={6}
+                          required
+                        />
+                      </div>
+                    </div>
+                    {errMsg && <p className="tag is-warning">{errMsg}</p>}
+                    <div className="field">
+                      <p className="control">
+                        <button
+                          className="button is-success is-large"
+                          disabled={isLoading}
+                        >
+                          Connexion
+                        </button>
+                      </p>
+                    </div>
+                  </form>
                 </div>
-                <div className="field">
-                  <p className="control">
-                    <button className="button is-success is-large">
-                      {isLoading ? "loading..." : "Connexion"}
-                    </button>
-                  </p>
-                </div>
-                {errMsg && <p>{errMsg}</p>}
-              </form>
+              </div>
             </div>
           </div>
         </section>

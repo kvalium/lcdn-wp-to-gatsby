@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
 
+.login-page {
+  height: 100vh;
+}
+
+.login-page .login-header {
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+.login-page .login-header .site-name {
+  font-size: 120%;
+}
+
 .card {
   height: 100%;
 }
@@ -8,6 +20,12 @@
 .title,
 .subtitle {
   font-family: "Quicksand", sans-serif;
+}
+
+.navbar .navbar-burger {
+  background: none;
+  border: none;
+  outline: 0;
 }
 
 .navbar {
@@ -22,6 +40,11 @@
   font-weight: bold;
   font-size: 3rem;
   color: white;
+}
+@media screen and (max-width: 1024px) {
+  .navbar-brand a {
+    font-size: 1.5rem;
+  }
 }
 
 .card-content .title {
