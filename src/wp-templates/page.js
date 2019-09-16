@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
+import Auth from "../components/auth"
 
 class PageTemplate extends Component {
   render() {
@@ -11,14 +12,16 @@ class PageTemplate extends Component {
 
     return (
       <Layout>
-        <Helmet>
-          <title>{currentPage.title}</title>
-        </Helmet>
-        <h1
-          className="title"
-          dangerouslySetInnerHTML={{ __html: currentPage.title }}
-        />
-        <div dangerouslySetInnerHTML={{ __html: currentPage.content }} />
+        <Auth>
+          <Helmet>
+            <title>{currentPage.title}</title>
+          </Helmet>
+          <h1
+            className="title"
+            dangerouslySetInnerHTML={{ __html: currentPage.title }}
+          />
+          <div dangerouslySetInnerHTML={{ __html: currentPage.content }} />
+        </Auth>
       </Layout>
     )
   }
