@@ -37,43 +37,43 @@ export default class Index extends React.Component {
     const { displayedPosts } = this.state
     return (
       <Layout>
-        <Auth>
-          <div className="columns is-multiline">
-            {displayedPosts.map(({ node }) => {
-              return (
-                <div className="column is-one-third" key={node.slug}>
-                  <Link to={node.slug}>
-                    <div className="card">
-                      {node.featured_img && (
-                        <div className="card-image">
-                          <figure className="image is-4by3">
-                            <img src={node.featured_img} alt={node.title} />
-                          </figure>
-                        </div>
-                      )}
-                      <div className="card-content">
-                        <h3 className="title is-5">{decode(node.title)}</h3>
-                        <div className="content">
-                          <div
-                            dangerouslySetInnerHTML={{ __html: node.excerpt }}
-                          />
-                        </div>
+        {/* <Auth> */}
+        <div className="columns is-multiline">
+          {displayedPosts.map(({ node }) => {
+            return (
+              <div className="column is-one-third" key={node.slug}>
+                <Link to={node.slug}>
+                  <div className="card">
+                    {node.featured_img && (
+                      <div className="card-image">
+                        <figure className="image is-4by3">
+                          <img src={node.featured_img} alt={node.title} />
+                        </figure>
+                      </div>
+                    )}
+                    <div className="card-content">
+                      <h3 className="title is-5">{decode(node.title)}</h3>
+                      <div className="content">
+                        <div
+                          dangerouslySetInnerHTML={{ __html: node.excerpt }}
+                        />
                       </div>
                     </div>
-                  </Link>
-                </div>
-              )
-            })}
-          </div>
-          <div className="has-text-centered">
-            <button
-              className="button is-info is-rounded is-large"
-              onClick={() => this.loadMore()}
-            >
-              Plus d'articles !
-            </button>
-          </div>
-        </Auth>
+                  </div>
+                </Link>
+              </div>
+            )
+          })}
+        </div>
+        <div className="has-text-centered">
+          <button
+            className="button is-info is-rounded is-large"
+            onClick={() => this.loadMore()}
+          >
+            Plus d'articles !
+          </button>
+        </div>
+        {/* </Auth> */}
       </Layout>
     )
   }
