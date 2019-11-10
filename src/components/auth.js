@@ -30,6 +30,7 @@ export class Auth extends React.Component {
   handleLogin = e => {
     this.setState({ isLoading: true })
     e.preventDefault()
+    e.stopPropagation()
     const password = e.target.elements[0].value
     handleLogin(password).then(r => {
       this.setState({
