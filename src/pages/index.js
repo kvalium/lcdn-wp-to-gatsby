@@ -38,6 +38,7 @@ export default class Index extends React.Component {
     return (
       <Layout>
         {/* <Auth> */}
+        <p style={{ display: "none" }}>{Date()}</p>
         <div className="columns is-multiline">
           {displayedPosts.map(({ node }) => {
             return (
