@@ -7,7 +7,6 @@ import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 
 import Layout from "../components/layout"
-import Auth from "../components/auth"
 
 import { extractWPPostContent } from "../services/wordpressService"
 
@@ -15,7 +14,7 @@ function PostTemplate({ data }) {
   const [currentImage, setCurrentImage] = useState(0)
   const [viewerIsOpen, setViewerIsOpen] = useState(false)
 
-  const openLightbox = useCallback((event, { photo, index }) => {
+  const openLightbox = useCallback((_event, { index }) => {
     setCurrentImage(index)
     setViewerIsOpen(true)
   }, [])
@@ -29,7 +28,6 @@ function PostTemplate({ data }) {
   const postElements = extractWPPostContent(post.content)
   return (
     <Layout>
-      {/* <Auth> */}
       <Helmet>
         <title>{post.title}</title>
       </Helmet>
@@ -77,7 +75,6 @@ function PostTemplate({ data }) {
           </div>
         </nav>
       </div>
-      {/* </Auth> */}
     </Layout>
   )
 }
