@@ -31,50 +31,46 @@ function PostTemplate({ data }) {
       <Helmet>
         <title>{post.title}</title>
       </Helmet>
-      <div className="post">
-        <h1
-          className="title is-1"
-          dangerouslySetInnerHTML={{ __html: post.title }}
-        />
-        {postElements.map(({ type, images, order, content }) => {
-          if (type === "gallery") {
-            return (
-              <div className="gallery" key={order}>
-                <Gallery photos={images} onClick={openLightbox} />
-                <ModalGateway>
-                  {viewerIsOpen && (
-                    <Modal onClose={closeLightbox}>
-                      <Carousel
-                        currentIndex={currentImage}
-                        views={images.map(x => ({
-                          ...x,
-                          srcset: x.srcSet,
-                          caption: x.title,
-                        }))}
-                      />
-                    </Modal>
-                  )}
-                </ModalGateway>
-              </div>
-            )
-          }
-          return (
-            <div
-              className="raw"
-              key={order}
-              dangerouslySetInnerHTML={{ __html: content }}
+      <section className="section">
+        <div className="container">
+          <div className="post">
+            <h1
+              className="title is-1"
+              dangerouslySetInnerHTML={{ __html: post.title }}
             />
-          )
-        })}
-        {/* <nav className="level">
-          <div className="level-item has-text-centered">
-            <button className="button is-rounded">Button</button>
+            {postElements.map(({ type, images, order, content }) => {
+              if (type === "gallery") {
+                return (
+                  <div className="gallery" key={order}>
+                    <Gallery photos={images} onClick={openLightbox} />
+                    <ModalGateway>
+                      {viewerIsOpen && (
+                        <Modal onClose={closeLightbox}>
+                          <Carousel
+                            currentIndex={currentImage}
+                            views={images.map(x => ({
+                              ...x,
+                              srcset: x.srcSet,
+                              caption: x.title,
+                            }))}
+                          />
+                        </Modal>
+                      )}
+                    </ModalGateway>
+                  </div>
+                )
+              }
+              return (
+                <div
+                  className="raw"
+                  key={order}
+                  dangerouslySetInnerHTML={{ __html: content }}
+                />
+              )
+            })}
           </div>
-          <div className="level-item has-text-centered">
-            <button className="button is-rounded">Button</button>
-          </div>
-        </nav> */}
-      </div>
+        </div>
+      </section>
     </Layout>
   )
 }

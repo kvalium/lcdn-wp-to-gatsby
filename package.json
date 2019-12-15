@@ -32,9 +32,7 @@
     "react-helmet": "^5.2.1",
     "react-images": "^1.0.0",
     "react-netlify-identity-widget": "^0.2.5",
-    "react-photo-gallery": "^8.0.0",
-    "react-redux": "^7.1.1",
-    "redux": "^4.0.4"
+    "react-photo-gallery": "^8.0.0"
   },
   "devDependencies": {
     "netlify-lambda": "^1.6.3",

@@ -145,7 +145,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-netlify-identity`,
       options: {
-        url: `https://www.lecoindesniaows.fr`, // required!
+        url: process.env.SITE_URL,
       },
     },
   ],

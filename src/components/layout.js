@@ -11,9 +11,6 @@ import { Helmet } from "react-helmet"
 
 import { useStaticQuery, graphql } from "gatsby"
 
-import { Provider } from "react-redux"
-import store from "../store/store"
-
 import "bulma/css/bulma.min.css"
 import "./layout.css"
 
@@ -41,20 +38,18 @@ const Layout = ({ children }) => {
 
   if (isLoggedIn) {
     return (
-      <Provider store={store}>
+      <>
         <Helmet titleTemplate="Le Coin des Niaows - %s">
           <title>Accueil</title>
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div className="container">
-          <section className="section">{children}</section>
-        </div>
+        {children}
         <footer className="footer">
           <div className="content has-text-centered">
             <p>© {new Date().getFullYear()}</p>
           </div>
         </footer>
-      </Provider>
+      </>
     )
   }
   return <IdentityModal showDialog={true} />
