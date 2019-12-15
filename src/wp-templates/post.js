@@ -36,17 +36,17 @@ function PostTemplate({ data }) {
           className="title is-1"
           dangerouslySetInnerHTML={{ __html: post.title }}
         />
-        {postElements.map(el => {
-          if (el.type === "gallery") {
+        {postElements.map(({ type, images, order, content }) => {
+          if (type === "gallery") {
             return (
-              <div className="gallery" key={el.order}>
-                <Gallery photos={el.images} onClick={openLightbox} />
+              <div className="gallery" key={order}>
+                <Gallery photos={images} onClick={openLightbox} />
                 <ModalGateway>
                   {viewerIsOpen && (
                     <Modal onClose={closeLightbox}>
                       <Carousel
                         currentIndex={currentImage}
-                        views={el.images.map(x => ({
+                        views={images.map(x => ({
                           ...x,
                           srcset: x.srcSet,
                           caption: x.title,
@@ -61,19 +61,19 @@ function PostTemplate({ data }) {
           return (
             <div
               className="raw"
-              key={el.order}
-              dangerouslySetInnerHTML={{ __html: el.content }}
+              key={order}
+              dangerouslySetInnerHTML={{ __html: content }}
             />
           )
         })}
-        <nav className="level">
+        {/* <nav className="level">
           <div className="level-item has-text-centered">
             <button className="button is-rounded">Button</button>
           </div>
           <div className="level-item has-text-centered">
             <button className="button is-rounded">Button</button>
           </div>
-        </nav>
+        </nav> */}
       </div>
     </Layout>
   )

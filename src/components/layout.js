@@ -36,11 +36,26 @@ const Layout = ({ children }) => {
   `)
 
   const identity = useIdentityContext()
-  const [dialog, setDialog] = React.useState(true)
-  console.log(identity)
+  // console.log(identity)
   const isLoggedIn = identity && identity.isLoggedIn
 
   if (isLoggedIn) {
+    const { isConfirmed } = identity
+    if (!isConfirmed)
+      return (
+        <div className="container" style={{ marginTop: 30 }}>
+          <article class="message is-large is-info">
+            <div class="message-header">
+              <p>Confirmez votre compte</p>
+            </div>
+            <div class="message-body">
+              Votre compte a bien été créé ! Pour accéder au Coin des Niaows il
+              ne vous reste plus qu'à confirmer la création en utilisant le lien
+              que vous venez de recevoir par mail
+            </div>
+          </article>
+        </div>
+      )
     return (
       <Provider store={store}>
         <Helmet titleTemplate="Le Coin des Niaows - %s">
@@ -58,7 +73,7 @@ const Layout = ({ children }) => {
       </Provider>
     )
   }
-  return <IdentityModal showDialog={dialog} />
+  return <IdentityModal showDialog={true} />
 }
 
 Layout.propTypes = {
