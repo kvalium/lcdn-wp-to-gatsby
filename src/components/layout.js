@@ -5,7 +5,7 @@
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-import React from "react"
+import React, { useState } from "react"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 
@@ -32,8 +32,9 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const [showLoginModal, setLoginModalVisibility] = useState(false)
+
   const identity = useIdentityContext()
-  // console.log(identity)
   const isLoggedIn = identity && identity.isLoggedIn
 
   if (isLoggedIn) {
@@ -52,7 +53,32 @@ const Layout = ({ children }) => {
       </>
     )
   }
-  return <IdentityModal showDialog={true} />
+  return (
+    <section className="section">
+      <div className="container">
+        <h1 className="title">Bienvenue sur le Coin des Niaows !</h1>
+        <p>pour accéder au site, vous devez vous connecter.</p>
+        <br />
+        <p>
+          Si vous n'avez pas encore créé de compte, cliquez sur le bouton "Se
+          connecter" puis sur l'onglet "Sign up" afin de renseigner vos
+          informations. Vous aurez ensuite besoin de confirmer votre création
+          via le mail qui vous sera adressé.
+        </p>
+        <br />
+        <button
+          className="button is-primary is-large"
+          onClick={() => setLoginModalVisibility(true)}
+        >
+          Se connecter / créer un compte
+        </button>
+        <IdentityModal
+          showDialog={showLoginModal}
+          onCloseDialog={() => setLoginModalVisibility(false)}
+        />
+      </div>
+    </section>
+  )
 }
 
 Layout.propTypes = {
