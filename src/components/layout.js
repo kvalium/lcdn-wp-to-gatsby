@@ -19,6 +19,11 @@ import "./layout.css"
 
 import Header from "./header"
 
+import IdentityModal, {
+  useIdentityContext,
+} from "react-netlify-identity-widget"
+import "react-netlify-identity-widget/styles.css" // delete if you want to bring your own CSS
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -30,22 +35,30 @@ const Layout = ({ children }) => {
     }
   `)
 
-  return (
-    <Provider store={store}>
-      <Helmet titleTemplate="Le Coin des Niaows - %s">
-        <title>Accueil</title>
-      </Helmet>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <div className="container">
-        <section className="section">{children}</section>
-      </div>
-      <footer className="footer">
-        <div className="content has-text-centered">
-          <p>© {new Date().getFullYear()}</p>
+  const identity = useIdentityContext()
+  const [dialog, setDialog] = React.useState(true)
+  console.log(identity)
+  const isLoggedIn = identity && identity.isLoggedIn
+
+  if (isLoggedIn) {
+    return (
+      <Provider store={store}>
+        <Helmet titleTemplate="Le Coin des Niaows - %s">
+          <title>Accueil</title>
+        </Helmet>
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <div className="container">
+          <section className="section">{children}</section>
         </div>
-      </footer>
-    </Provider>
-  )
+        <footer className="footer">
+          <div className="content has-text-centered">
+            <p>© {new Date().getFullYear()}</p>
+          </div>
+        </footer>
+      </Provider>
+    )
+  }
+  return <IdentityModal showDialog={dialog} />
 }
 
 Layout.propTypes = {

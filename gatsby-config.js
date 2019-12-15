@@ -142,5 +142,11 @@ module.exports = {
     //`gatsby-plugin-offline`,
     `gatsby-plugin-netlify`,
     `gatsby-plugin-netlify-cache`,
+    {
+      resolve: `gatsby-plugin-netlify-identity`,
+      options: {
+        url: `https://www.lecoindesniaows.fr/`, // required!
+      },
+    },
   ],
 }
