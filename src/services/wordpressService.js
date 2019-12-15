@@ -7,7 +7,7 @@ import cheerio from "cheerio"
 export const extractWPPostContent = node => {
   // using cheerio as DOMParser as build stage doesn't manipulate the DOM
   const $ = cheerio.load(`<span id="post-content">${node}</span>`)
-
+  
   const postElements = Array.from(
     $("#post-content")
       .children()
@@ -20,12 +20,20 @@ export const extractWPPostContent = node => {
             images: Array.from(
               $(el)
                 .children()
-                .map((_i, image) => ({
-                  src: $(image).find("img")[0].attribs["data-large-file"],
-                  width: 1,
-                  height: 1,
-                }))
-            ),
+                .map((_j, image) => {
+                  return Array.from(
+                    $(image)
+                      .find("img")
+                      .map((_i, r) => {
+                        return {
+                          src: r.attribs["data-large-file"],
+                          width: 1,
+                          height: 1,
+                        }
+                      })
+                  )
+                })
+            ).flat(),
           }
         }
         // returns raw HTML of other elements
