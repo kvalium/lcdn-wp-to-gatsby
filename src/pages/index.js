@@ -4,7 +4,7 @@ import { decode } from "he"
 
 import Layout from "../components/layout"
 
-const numberOfPostsPerPage = 9
+const numberOfPostsPerPage = 12
 
 export default class Index extends React.Component {
   constructor(props) {
