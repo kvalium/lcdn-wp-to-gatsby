@@ -7,8 +7,13 @@ const slash = require(`slash`)
 // create pages.
 // Will create pages for WordPress pages (route : /{slug})
 // Will create pages for WordPress posts (route : /post/{slug})
-exports.createPages = async ({ graphql, actions }) => {
-  const { createPage } = actions
+exports.createPages = async ({
+  graphql,
+  actions
+}) => {
+  const {
+    createPage
+  } = actions
 
   // The “graphql” function allows us to run arbitrary
   // queries against the local Gatsby GraphQL schema. Think of
@@ -34,6 +39,7 @@ exports.createPages = async ({ graphql, actions }) => {
             status
             template
             format
+            wordpress_id
           }
         }
       }
@@ -46,7 +52,10 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   // Access query results via object destructuring
-  const { allWordpressPage, allWordpressPost } = result.data
+  const {
+    allWordpressPage,
+    allWordpressPost
+  } = result.data
 
   const pageTemplate = path.resolve(`./src/wp-templates/page.js`)
   // We want to create a detailed page for each
@@ -78,7 +87,8 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/${edge.node.slug}/`,
       component: slash(postTemplate),
       context: {
-        id: edge.node.id,
+        // id: edge.node.id,
+        wordpress_id: edge.node.wordpress_id
       },
     })
   })

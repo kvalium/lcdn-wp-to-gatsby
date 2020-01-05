@@ -24,7 +24,10 @@ function PostTemplate({ data }) {
     setViewerIsOpen(false)
   }
 
-  const post = data.wordpressPost
+  const {
+    wordpressPost: post,
+    allWordpressWpComments: { edges: comments },
+  } = data
   const postElements = extractWPPostContent(post.content)
   return (
     <Layout>
@@ -68,6 +71,12 @@ function PostTemplate({ data }) {
                 />
               )
             })}
+            {comments &&
+              comments
+                .filter(c => c.node.status === "approved")
+                .map(({ node: comment }) => (
+                  <div className="comments">{JSON.stringify(comment)}</div>
+                ))}
           </div>
         </div>
       </section>
@@ -83,8 +92,8 @@ PostTemplate.propTypes = {
 export default PostTemplate
 
 export const pageQuery = graphql`
-  query($id: String!) {
-    wordpressPost(id: { eq: $id }) {
+  query($wordpress_id: Int!) {
+    wordpressPost(wordpress_id: { eq: $wordpress_id }) {
       title
       date(formatString: "DD MMMM YYYY", locale: "FR")
       date(formatString: "DD MMMM YYYY", locale: "FR")
@@ -97,6 +106,20 @@ export const pageQuery = graphql`
         slug
       }
       content
+    }
+    allWordpressWpComments(filter: { post: { eq: $wordpress_id } }) {
+      edges {
+        node {
+          post
+          author_name
+          date(formatString: "DD MMMM YYYY", locale: "FR")
+          content
+          status
+          author_avatar_urls {
+            wordpress_96
+          }
+        }
+      }
     }
   }
 `

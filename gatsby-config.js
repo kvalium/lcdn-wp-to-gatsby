@@ -123,6 +123,7 @@ module.exports = {
           // "**/tags",
           // "**/taxonomies",
           "**/users",
+          "**/comments"
         ],
         // Blacklisted routes using glob patterns
         // excludedRoutes: ["**/posts/1456"],
@@ -132,7 +133,9 @@ module.exports = {
         // Defaults to false
         keepMediaSizes: false,
         // use a custom normalizer which is applied after the built-in ones.
-        normalizer: function({ entities }) {
+        normalizer: function ({
+          entities
+        }) {
           return entities
         },
       },

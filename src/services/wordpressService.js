@@ -44,6 +44,5 @@ export const extractWPPostContent = node => {
         }
       })
   )
-  console.log(postElements)
   return postElements
 }

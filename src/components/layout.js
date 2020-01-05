@@ -37,46 +37,44 @@ const Layout = ({ children }) => {
   const identity = useIdentityContext()
   const isLoggedIn = identity && identity.isLoggedIn
 
-  if (isLoggedIn) {
+  if (!isLoggedIn) {
     return (
       <>
         <Helmet titleTemplate="Le Coin des Niaows - %s">
-          <title>Accueil</title>
-        </Helmet>
-        <Header siteTitle={data.site.siteMetadata.title} />
-        {children}
+          <title> Accueil </title>{" "}
+        </Helmet>{" "}
+        <Header siteTitle={data.site.siteMetadata.title} /> {children}{" "}
         <footer className="footer">
           <div className="content has-text-centered">
-            <p>© {new Date().getFullYear()}</p>
-          </div>
-        </footer>
+            <p> ©{new Date().getFullYear()} </p>{" "}
+          </div>{" "}
+        </footer>{" "}
       </>
     )
   }
   return (
     <section className="section">
       <div className="container">
-        <h1 className="title">Bienvenue sur le Coin des Niaows !</h1>
-        <p>pour accéder au site, vous devez vous connecter.</p>
-        <br />
+        <h1 className="title"> Bienvenue sur le Coin des Niaows! </h1>{" "}
+        <p> pour accéder au site, vous devez vous connecter. </p> <br />
         <p>
-          Si vous n'avez pas encore créé de compte, cliquez sur le bouton "Se
-          connecter" puis sur l'onglet "Sign up" afin de renseigner vos
-          informations. Vous aurez ensuite besoin de confirmer votre création
-          via le mail qui vous sera adressé.
-        </p>
+          Si vous n 'avez pas encore créé de compte, cliquez sur le bouton "Se
+          connecter " puis sur l'onglet " Sign up " afin de renseigner vos
+          informations.Vous aurez ensuite besoin de confirmer votre création via
+          le mail qui vous sera adressé.{" "}
+        </p>{" "}
         <br />
         <button
           className="button is-primary is-large"
           onClick={() => setLoginModalVisibility(true)}
         >
-          Se connecter / créer un compte
-        </button>
+          Se connecter / créer un compte{" "}
+        </button>{" "}
         <IdentityModal
           showDialog={showLoginModal}
           onCloseDialog={() => setLoginModalVisibility(false)}
-        />
-      </div>
+        />{" "}
+      </div>{" "}
     </section>
   )
 }
