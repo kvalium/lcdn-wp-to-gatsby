@@ -37,7 +37,7 @@ const Layout = ({ children }) => {
   const identity = useIdentityContext()
   const isLoggedIn = identity && identity.isLoggedIn
 
-  if (!isLoggedIn) {
+  if (isLoggedIn) {
     return (
       <>
         <Helmet titleTemplate="Le Coin des Niaows - %s">
