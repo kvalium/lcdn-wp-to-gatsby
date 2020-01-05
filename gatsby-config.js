@@ -150,6 +150,7 @@ module.exports = {
       options: {
         url: process.env.SITE_URL,
       },
-    }
+    },
+    `gatsby-plugin-sass`
   ],
 }

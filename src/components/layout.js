@@ -11,8 +11,9 @@ import { Helmet } from "react-helmet"
 
 import { useStaticQuery, graphql } from "gatsby"
 
-import "bulma/css/bulma.min.css"
-import "./layout.css"
+// import "bulma/css/bulma.min.css"
+// import "./layout.css"
+import "./styles.scss"
 
 import Header from "./header"
 
