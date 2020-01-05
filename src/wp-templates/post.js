@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 
@@ -28,8 +28,11 @@ function PostTemplate({ data }) {
   const {
     wordpressPost: post,
     allWordpressWpComments: { edges: comments },
+    allWordpressPost: { edges: navigation },
   } = data
+  const postNav = navigation.filter(navs => navs.node.id === post.id)[0]
   const postElements = extractWPPostContent(post.content)
+  console.log(postNav)
   return (
     <Layout>
       <Helmet>
@@ -38,6 +41,7 @@ function PostTemplate({ data }) {
       <section className="section">
         <div className="container">
           <div className="post">
+            <p className="is-size-6 has-text-grey">{post.date}</p>
             <h1
               className="title is-1"
               dangerouslySetInnerHTML={{ __html: post.title }}
@@ -73,6 +77,37 @@ function PostTemplate({ data }) {
               )
             })}
             {comments.length > 0 && <Comments comments={comments} />}
+            <div
+              class="buttons are-medium"
+              style={{
+                marginTop: 100,
+                display: "flex",
+                justifyContent: "space-between",
+              }}
+            >
+              {postNav.next && (
+                <Link
+                  to={postNav.next.slug}
+                  class="button is-outlined is-primary"
+                >
+                  <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                  </span>
+                  <span>Précédent</span>
+                </Link>
+              )}
+              {postNav.previous && (
+                <Link
+                  to={postNav.previous.slug}
+                  class="button is-outlined is-primary"
+                >
+                  <span>Suivant</span>
+                  <span class="icon is-small">
+                    <i class="fas fa-check"></i>
+                  </span>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -90,6 +125,7 @@ export default PostTemplate
 export const pageQuery = graphql`
   query($wordpress_id: Int!) {
     wordpressPost(wordpress_id: { eq: $wordpress_id }) {
+      id
       title
       date(formatString: "DD MMMM YYYY", locale: "FR")
       date(formatString: "DD MMMM YYYY", locale: "FR")
@@ -114,6 +150,19 @@ export const pageQuery = graphql`
           author_avatar_urls {
             wordpress_48
           }
+        }
+      }
+    }
+    allWordpressPost {
+      edges {
+        next {
+          slug
+        }
+        previous {
+          slug
+        }
+        node {
+          id
         }
       }
     }

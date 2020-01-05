@@ -21,11 +21,10 @@ export const Comments = ({ comments }) => (
                       ? "Julien"
                       : comment.author_name}
                   </p>
-                  <p>{`le ${comment.date}`}</p>
+                  <p className="has-text-grey">{`le ${comment.date}`}</p>
                 </div>
               </div>
               <div dangerouslySetInnerHTML={{ __html: comment.content }} />
-              {/* {JSON.stringify(comment)} */}
             </div>
           ))}
       </div>
