@@ -7,6 +7,7 @@ import Gallery from "react-photo-gallery"
 import Carousel, { Modal, ModalGateway } from "react-images"
 
 import Layout from "../components/layout"
+import Comments from "../components/Comments"
 
 import { extractWPPostContent } from "../services/wordpressService"
 
@@ -71,12 +72,7 @@ function PostTemplate({ data }) {
                 />
               )
             })}
-            {comments &&
-              comments
-                .filter(c => c.node.status === "approved")
-                .map(({ node: comment }) => (
-                  <div className="comments">{JSON.stringify(comment)}</div>
-                ))}
+            {comments && <Comments comments={comments} />}
           </div>
         </div>
       </section>
@@ -116,7 +112,7 @@ export const pageQuery = graphql`
           content
           status
           author_avatar_urls {
-            wordpress_96
+            wordpress_48
           }
         }
       }
