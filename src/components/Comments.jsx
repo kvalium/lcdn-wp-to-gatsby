@@ -4,10 +4,9 @@ export const Comments = ({ comments }) => (
   <div>
     {comments && (
       <div className="comments">
-        <h3
-          className="is-size-4"
-          style={{ marginBottom: 20 }}
-        >{`${comments.length} commentaires :`}</h3>
+        <h3 className="is-size-4" style={{ marginBottom: 20 }}>{`${
+          comments.length
+        } commentaire${comments.length > 1 ? "s" : ""} :`}</h3>
         {comments
           .filter(c => c.node.status === "approved")
           .map(({ node: comment }) => (

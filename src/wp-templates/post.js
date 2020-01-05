@@ -72,7 +72,7 @@ function PostTemplate({ data }) {
                 />
               )
             })}
-            {comments && <Comments comments={comments} />}
+            {comments.length > 0 && <Comments comments={comments} />}
           </div>
         </div>
       </section>

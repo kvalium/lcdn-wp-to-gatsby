@@ -123,7 +123,7 @@ module.exports = {
           // "**/tags",
           // "**/taxonomies",
           "**/users",
-          "**/comments"
+          "**/comments",
         ],
         // Blacklisted routes using glob patterns
         // excludedRoutes: ["**/posts/1456"],
@@ -150,6 +150,6 @@ module.exports = {
       options: {
         url: process.env.SITE_URL,
       },
-    },
+    }
   ],
 }
