@@ -32,14 +32,14 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Coin des Niaows`,
-        short_name: `Coin des niaows`,
+        name: `Le Coin des Niaows`,
+        short_name: `LCDN`,
         start_url: `/`,
-        background_color: `#00d1b2`,
-        theme_color: `#00d1b2`,
+        background_color: `#3c1c67`,
+        theme_color: `#3c1c67`,
         // display: `minimal-ui`,
         display: "standalone",
-        icon: `src/images/lcdn-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/lcdn.png`, // This path is relative to the root of the site.
         crossOrigin: `use-credentials`,
       },
     },
