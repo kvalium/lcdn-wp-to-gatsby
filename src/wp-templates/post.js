@@ -32,9 +32,9 @@ function PostTemplate({ data }) {
   } = data
   const postNav = navigation.filter(navs => navs.node.id === post.id)[0]
   const postElements = extractWPPostContent(post.content)
-  console.log(postNav)
   return (
     <Layout>
+      <p style={{ display: "none" }}>{Date()}</p>
       <Helmet>
         <title>{post.title}</title>
       </Helmet>
