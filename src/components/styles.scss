@@ -11,6 +11,11 @@ $footer-background-color: $lightYellow;
 @import "../../node_modules/bulma/bulma.sass";
 
 // OLD STYLES
+iframe {
+    width: 100%;
+    max-width: 640px;
+}
+
 .login-page {
   height: 100vh;
 
