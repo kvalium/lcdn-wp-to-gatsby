@@ -143,16 +143,16 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
-    {
-      resolve: `gatsby-plugin-netlify`,
-      options: {
-        headers: {
-          "/*": [
-            "cache-control: public, max-age=0, must-revalidate",
-          ]
-        }
-      }
-    },
+    // {
+    //   resolve: `gatsby-plugin-netlify`,
+    //   options: {
+    //     headers: {
+    //       "*": [
+    //         "cache-control: public, max-age=0, must-revalidate",
+    //       ]
+    //     }
+    //   }
+    // },
     // `gatsby-plugin-netlify-cache`,
     {
       resolve: `gatsby-plugin-netlify-identity`,
