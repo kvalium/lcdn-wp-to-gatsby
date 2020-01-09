@@ -65,7 +65,7 @@ const Layout = ({ children }) => {
         </p>
         <br />
         <button
-          className="button is-primary is-large"
+          className="button is-primary"
           onClick={() => setLoginModalVisibility(true)}
         >
           Se connecter / créer un compte
