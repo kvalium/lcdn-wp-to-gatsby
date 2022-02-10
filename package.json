@@ -27,7 +27,7 @@
     "gatsby-wordpress-inline-images": "^1.0.0",
     "he": "^1.2.0",
     "md5": "^2.2.1",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
